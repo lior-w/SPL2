@@ -1,5 +1,6 @@
 package bgu.spl.mics.application.services;
 
+import bgu.spl.mics.application.messages.TickBroadcast;
 import bgu.spl.mics.MicroService;
 
 /**
@@ -14,7 +15,7 @@ import bgu.spl.mics.MicroService;
 public class TimeService extends MicroService{
 
 	public TimeService() {
-		super("Change_This_Name");
+		super("TimeService");
 		// TODO Implement this
 	}
 
