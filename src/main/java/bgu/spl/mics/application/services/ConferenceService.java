@@ -2,6 +2,7 @@ package bgu.spl.mics.application.services;
 
 import bgu.spl.mics.application.messages.PublishConferenceBroadcast;
 import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.messages.TickBroadcast;
 
 /**
  * Conference service is in charge of
@@ -13,14 +14,17 @@ import bgu.spl.mics.MicroService;
  * You MAY change constructor signatures and even add new public constructors.
  */
 public class ConferenceService extends MicroService {
+    private int ticks;
     public ConferenceService(String name) {
         super(name);
-        // TODO Implement this
+        ticks = 0;
     }
 
     @Override
     protected void initialize() {
-        // TODO Implement this
+        subscribeBroadcast(TickBroadcast.class, tb -> {
+            ticks++;
+        });
 
     }
 }

@@ -1,6 +1,11 @@
 package bgu.spl.mics.application.services;
 
 import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.messages.PublishResultsEvent;
+import bgu.spl.mics.application.messages.TestModelEvent;
+import bgu.spl.mics.application.messages.TickBroadcast;
+import bgu.spl.mics.application.messages.TrainModelEvent;
+import bgu.spl.mics.application.objects.Student;
 
 /**
  * Student is responsible for sending the {@link TrainModelEvent},
@@ -12,14 +17,18 @@ import bgu.spl.mics.MicroService;
  * You MAY change constructor signatures and even add new public constructors.
  */
 public class StudentService extends MicroService {
+    private Student student;
+    private int ticks;
     public StudentService(String name) {
         super(name);
-        // TODO Implement this
+        ticks = 0;
     }
 
     @Override
     protected void initialize() {
-        // TODO Implement this
+        subscribeBroadcast(TickBroadcast.class, tb -> {
+            ticks++;
+        });
 
     }
 }

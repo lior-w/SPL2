@@ -3,6 +3,8 @@ package bgu.spl.mics.application.services;
 import bgu.spl.mics.application.messages.TickBroadcast;
 import bgu.spl.mics.MicroService;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * TimeService is the global system timer There is only one instance of this micro-service.
  * It keeps track of the amount of ticks passed since initialization and notifies
@@ -13,16 +15,24 @@ import bgu.spl.mics.MicroService;
  * You MAY change constructor signatures and even add new public constructors.
  */
 public class TimeService extends MicroService{
+	private long timeUnits;
+	private static class TimeServiceHolder {
+		private static TimeService instance = new TimeService();
+	}
 
-	public TimeService() {
+
+	private TimeService() {
+		timeUnits = 1;
 		super("TimeService");
-		// TODO Implement this
+	}
+
+	public static TimeService getInstance() {
+		return TimeServiceHolder.instance;
 	}
 
 	@Override
 	protected void initialize() {
-		// TODO Implement this
-		
+		this.wait(TimeUnit.toMillis(timeUnits));
 	}
 
 }
